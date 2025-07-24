@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -15,6 +15,7 @@ import '../global.css'
 import { useColorScheme } from '@/components/useColorScheme';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ToastProvider } from "@/context/toast-provider"
+import { ThemeProvider } from "@/context/theme-provider" // Add this
 import AuthGuard from "@/components/auth/auth-guard"
 export {
   // Catch any errors thrown by the Layout component.
@@ -61,19 +62,21 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <QueryClientProvider client={queryClient}>
-      <ToastProvider>
-        <AuthGuard>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: "white" },
-            }}
-          />
-        </AuthGuard>
-      </ToastProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider>
+            <AuthGuard>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: "white" },
+                }}
+              />
+            </AuthGuard>
+          </ToastProvider>
+        </QueryClientProvider>
+      </NavigationThemeProvider>
     </ThemeProvider>
   );
 }

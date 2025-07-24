@@ -54,12 +54,18 @@
       [
         "@react-native-google-signin/google-signin",
         {
-          "iosUrlScheme": "com.yourcompany.emgsapp"
+          "iosUrlScheme": "com.googleusercontent.apps.YOUR_IOS_CLIENT_ID"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "83e55292-f1bd-47ef-9a26-d535226bb31b"
+      }
     }
   }
 }
