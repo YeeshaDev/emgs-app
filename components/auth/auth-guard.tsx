@@ -1,9 +1,9 @@
-
 import type React from "react"
 import { useEffect } from "react"
 import { View, ActivityIndicator } from "react-native"
 import { useRouter, useSegments } from "expo-router"
 import { useAuthStore } from "@/lib/store/auth-store"
+import Constants from 'expo-constants'
 
 interface AuthGuardProps {
   children: React.ReactNode
@@ -15,7 +15,18 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
   const segments = useSegments()
   const router = useRouter()
 
+  // Check if we're in development mode with debug enabled
+  const isDevelopmentDebug = 
+    Constants.expoConfig?.extra?.environment === 'DEVELOPMENT' && 
+    Constants.expoConfig?.extra?.debug === 'true'
+
   useEffect(() => {
+    // Skip authentication checks in development debug mode
+    if (isDevelopmentDebug) {
+      console.log('🚧 Auth Guard: Bypassing authentication checks (Development + Debug mode)')
+      return
+    }
+
     if (isLoading) return
 
     const inAuthGroup = segments[0] === "(tabs)" 
@@ -40,9 +51,9 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
       // Redirect to home if already authenticated
       router.replace("/auth/login")
     }
-  }, [isAuthenticated, user, segments, isLoading, router])
+  }, [isAuthenticated, user, segments, isLoading, router, isDevelopmentDebug])
 
-  if (isLoading) {
+  if (isLoading && !isDevelopmentDebug) {
     return (
       <View className="flex-1 bg-white items-center justify-center">
         <ActivityIndicator size="large" color="#B91C1C" />

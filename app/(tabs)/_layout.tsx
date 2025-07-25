@@ -18,6 +18,7 @@ export default function TabsLayout() {
       {/* <Tabs.Screen name="course" />
       {isTutor ? <Tabs.Screen name="create" /> : <Tabs.Screen name="services" />}
       <Tabs.Screen name="account" /> */}
+      <Tabs.Screen name="services" />
     </Tabs>
   )
 }

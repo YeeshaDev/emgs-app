@@ -28,9 +28,9 @@ export const GoogleAuthButton = ({
     GoogleSignin.configure({
       webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID, 
       iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID, 
-      offlineAccess: true, 
+      offlineAccess: false, 
       hostedDomain: '', 
-      forceCodeForRefreshToken: true, // Android only
+      forceCodeForRefreshToken: false, // Android only
       accountName: '', // Android only
       scopes: ['openid', 'email', 'profile'], 
     })

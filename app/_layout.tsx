@@ -66,14 +66,14 @@ function RootLayoutNav() {
       <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <QueryClientProvider client={queryClient}>
           <ToastProvider>
-            <AuthGuard>
+            {/* <AuthGuard> */}
               <Stack
                 screenOptions={{
                   headerShown: false,
                   contentStyle: { backgroundColor: "white" },
                 }}
               />
-            </AuthGuard>
+            {/* </AuthGuard> */}
           </ToastProvider>
         </QueryClientProvider>
       </NavigationThemeProvider>

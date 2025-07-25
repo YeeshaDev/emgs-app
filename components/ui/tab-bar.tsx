@@ -36,7 +36,7 @@ const TabBar = ({ isTutor = false }: TabBarProps) => {
       baseTabs.push({
         name: "Services",
         icon: "briefcase",
-        path: "/service",
+        path: "/services",
       })
     }
 
